@@ -9,6 +9,24 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+.add-todo-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.add-todo-btn:hover {
+  background-color: #45a049;
 }
 
 h1 {
@@ -17,10 +35,9 @@ h1 {
 }
 
 form {
-  background-color: white;
+  background-color: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
 
@@ -52,14 +69,17 @@ ul {
   padding: 0;
 }
 
-/* 修改 li 样式 */
 li {
-  background-color: white;
+  background-color: #f9f9f9;
   margin-bottom: 10px;
   padding: 15px;
   border-radius: 8px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+li:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative; /* 添加这行 */
 }
 
 li > * {
@@ -69,15 +89,19 @@ li > * {
 .todo-title {
   font-size: 18px;
   font-weight: bold;
+  display: inline-block;
+  margin-bottom: 5px;
 }
 
 .todo-detail {
   color: #666;
+  margin-bottom: 5px;
 }
 
 .todo-time {
   font-size: 14px;
   color: #888;
+  margin: 2px 0;
 }
 
 /* 修改 delete-btn 样式 */
