@@ -4,7 +4,7 @@ import { store } from './app/store';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import './App.css';
-
+import './styles/TodoList.css';
 function App() {
   const [showForm, setShowForm] = useState(false);
 
