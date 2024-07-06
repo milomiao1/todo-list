@@ -8,6 +8,10 @@ import './styles/TodoList.css';
 function App() {
   const [showForm, setShowForm] = useState(false);
 
+  const handleFormClose = () => {
+    setShowForm(false);
+  };
+
   return (
     <Provider store={store}>
       <div className="App">
@@ -15,7 +19,7 @@ function App() {
         <button className="add-todo-btn" onClick={() => setShowForm(!showForm)}>
           {showForm ? 'Close' : 'Add New Todo'}
         </button>
-        {showForm && <TodoForm />}
+        {showForm && <TodoForm onFormClose={handleFormClose} />}
         <TodoList />
       </div>
     </Provider>

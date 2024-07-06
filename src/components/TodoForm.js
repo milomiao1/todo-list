@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../features/todoSlice';
 
-const TodoForm = () => {
+const TodoForm = ({ onFormClose }) => {
 
   useEffect(() => {
     const now = new Date();
@@ -43,6 +43,7 @@ const TodoForm = () => {
     setDetail('');
     setStartTime('');
     setEndTime('');
+    onFormClose()
   };
 
   return (
