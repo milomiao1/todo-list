@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { addTodo } from '../features/todoSlice';
 
 const TodoForm = ({ onFormClose }) => {
@@ -26,7 +27,10 @@ const TodoForm = ({ onFormClose }) => {
   const [detail, setDetail] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
+  
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,7 +47,7 @@ const TodoForm = ({ onFormClose }) => {
     setDetail('');
     setStartTime('');
     setEndTime('');
-    onFormClose()
+    navigate('/'); // 提交后返回主页
   };
 
   return (
@@ -72,6 +76,7 @@ const TodoForm = ({ onFormClose }) => {
         />
       </div>
       <button type="submit">Add Todo</button>
+      <button type="button" onClick={() => navigate('/')}>Cancel</button>
     </form>
   );
 };

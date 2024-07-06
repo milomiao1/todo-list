@@ -1,40 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { store } from './app/store';
-import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
+import TodoForm from './components/TodoForm';
 import HeaderBar from './components/HeaderBar';
+import { useNavigate } from 'react-router-dom';
 
 import './App.css';
 import './styles/TodoList.css';
 function App() {
-  const [showForm, setShowForm] = useState(false);
 
-  const handleFormClose = () => {
-    setShowForm(false);
-  };
-
-  const handleButtonClick = (buttonName) => {
-    setShowForm(!showForm)
-  };
-
-  const headerButtons = () => {
-      if (showForm) {
-        return [{ label: 'Close', onClick: () => handleButtonClick('Button 2') },]
-      } else {
-        return [{ label: 'Add New', onClick: () => handleButtonClick('Button 1') },]
-      }
-  }
-  
   return (
     <Provider store={store}>
-      <div className="App">
-        <HeaderBar title="Todo List" buttons={headerButtons()} />
-        {showForm && <TodoForm onFormClose={handleFormClose} />}
-        <TodoList />
-      </div>
+      <Router>
+        <AppContent />
+      </Router>
     </Provider>
   );
 }
+
+function AppContent() {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate('/add');
+  };
+
+  const headerButtons = [
+    { label: 'Add New', onClick: handleButtonClick },
+  ];
+
+  return (
+    <div className="App">
+      <HeaderBar title="Todo List" buttons={headerButtons} />
+      <Routes>
+        <Route path="/" element={<TodoList />} />
+        <Route path="/add" element={<TodoForm />} />
+      </Routes>
+    </div>
+  );
+}
+
 
 export default App;
