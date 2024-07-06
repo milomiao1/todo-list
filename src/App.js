@@ -3,6 +3,8 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
+import HeaderBar from './components/HeaderBar';
+
 import './App.css';
 import './styles/TodoList.css';
 function App() {
@@ -12,13 +14,22 @@ function App() {
     setShowForm(false);
   };
 
+  const handleButtonClick = (buttonName) => {
+    setShowForm(!showForm)
+  };
+
+  const headerButtons = () => {
+      if (showForm) {
+        return [{ label: 'Close', onClick: () => handleButtonClick('Button 2') },]
+      } else {
+        return [{ label: 'Add New', onClick: () => handleButtonClick('Button 1') },]
+      }
+  }
+  
   return (
     <Provider store={store}>
       <div className="App">
-        <h1>Todo List</h1>
-        <button className="add-todo-btn" onClick={() => setShowForm(!showForm)}>
-          {showForm ? 'Close' : 'Add New Todo'}
-        </button>
+        <HeaderBar title="Todo List" buttons={headerButtons()} />
         {showForm && <TodoForm onFormClose={handleFormClose} />}
         <TodoList />
       </div>
