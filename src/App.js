@@ -1,16 +1,18 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { store } from './app/store';
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 import HeaderBar from './components/HeaderBar';
+import TransitionEffects from './components/TransitionEffects';
 import { useNavigate } from 'react-router-dom';
 
 import './App.css';
 import './styles/TodoList.css';
-function App() {
+import './styles/TransitionEffects.css';
 
+function App() {
   return (
     <Provider store={store}>
       <Router>
@@ -22,6 +24,7 @@ function App() {
 
 function AppContent() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleButtonClick = () => {
     navigate('/add');
@@ -34,13 +37,14 @@ function AppContent() {
   return (
     <div className="App">
       <HeaderBar title="Todo List" buttons={headerButtons} />
-      <Routes>
-        <Route path="/" element={<TodoList />} />
-        <Route path="/add" element={<TodoForm />} />
-      </Routes>
+      <TransitionEffects location={location} effect="fade">
+        <Routes location={location}>
+          <Route path="/" element={<TodoList />} />
+          <Route path="/add" element={<TodoForm />} />
+        </Routes>
+      </TransitionEffects>
     </div>
   );
 }
-
 
 export default App;
